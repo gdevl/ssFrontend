@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import AddToLibrary from "./AddToLibrary";
 import ViewLibrary from "./ViewLibrary";
+import UserProfileButton from "./UserProfileButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +40,7 @@ const Navigation = () => {
           <Typography variant="h6" className={classes.title}>
             Home
           </Typography>
+          <UserProfileButton />
           <AddToLibrary />
           <ViewLibrary />
           <SignOut />

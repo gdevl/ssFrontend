@@ -4,7 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 const ViewLibrary = () => {
   const handleClick = () => {
-    alert("It works!");
+    alert(`You clicked the ViewLibrary button!`);
   };
 
   return (

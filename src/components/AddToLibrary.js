@@ -3,8 +3,8 @@ import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import IconButton from "@material-ui/core/IconButton";
 
 const AddToLibrary = () => {
-  const handleClick = () => {
-    alert("It works!");
+  const handleClick = (e) => {
+    alert(`You clicked the AddToLibrary button!`);
   };
 
   return (
