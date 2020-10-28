@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   makeStyles,
   createMuiTheme,
   ThemeProvider,
-} from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
-import orange from '@material-ui/core/colors/orange';
-import { useSelector, useDispatch } from 'react-redux';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import SignIn from './components/SignIn';
-import Navigation from './components/Navigation';
-import Main from './components/Main';
-import { loadToken } from './store/authentication';
+} from "@material-ui/core/styles";
+// import blue from "@material-ui/core/colors/blue";
+// import grey from "@material-ui/core/colors/grey";
+// import orange from "@material-ui/core/colors/orange";
+import { useSelector, useDispatch } from "react-redux";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import SignIn from "./components/SignIn";
+import Main from "./components/Main";
+import { loadToken } from "./store/authentication";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
       rest.needLogin === true ? (
-        <Redirect to='/login' />
+        <Redirect to="/login" />
       ) : (
         <Component {...props} />
       )
@@ -29,15 +29,21 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: orange[700],
+      light: "#9e9e9e",
+      main: "#424242",
+      dark: "#212121",
+      contrastText: "#fff",
     },
     secondary: {
-      main: blue[900],
+      light: "#e0e0e0",
+      main: "#f57c00",
+      dark: "#e65100",
+      contrastText: "#000",
     },
   },
 });
 
-const useStyles = makeStyles((theme) => ({
+const styles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -63,7 +69,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    document.title = 'Sound Shroud';
+    document.title = "Sound Shroud";
   }, []);
 
   if (!loaded) {
@@ -71,17 +77,17 @@ const App = () => {
   }
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} useStyles={styles}>
         <Switch>
-          <Route path='/login' component={SignIn} />
+          <Route path="/login" component={SignIn} />
           <PrivateRoute
-            path='/'
+            path="/"
             exact={true}
             needLogin={needLogin}
             component={Main}
           />
           <PrivateRoute
-            path='/pokemon/:pokemonId'
+            path="/pokemon/:pokemonId"
             exact={true}
             needLogin={needLogin}
             component={Main}
