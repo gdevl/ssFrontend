@@ -77,7 +77,7 @@ const App = () => {
   }
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme} useStyles={styles}>
+      <ThemeProvider theme={theme}>
         <Switch>
           <Route path="/login" component={SignIn} />
           <PrivateRoute

@@ -1,8 +1,10 @@
 import { baseUrl } from "../config";
 
 const GET_ALL_SONGS = "soundcloud/songs/GET_ALL_SONGS";
+const SET_CURRENT_SONG = "soundcloud/songs/SET_CURRENT_SONG";
 
-export const getAllSongs = () => ({ type: GET_ALL_SONGS });
+export const getAllSongs = (list) => ({ type: GET_ALL_SONGS, list });
+export const getOneSong = (current) => ({ type: SET_CURRENT_SONG, current });
 
 export const fetchSongs = () => async (dispatch) => {
   const res = await fetch(`${baseUrl}/songs`, {
@@ -11,8 +13,24 @@ export const fetchSongs = () => async (dispatch) => {
   });
 
   if (res.ok) {
-    const { songs } = await res.json();
-    dispatch(getAllSongs(songs));
+    const list = await res.json();
+    dispatch(getAllSongs(list));
+  }
+};
+
+export const fetchOneSong = (id) => async (dispatch, getState) => {
+  const {
+    authentication: { token },
+  } = getState();
+  const response = await fetch(`${baseUrl}/songs/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (response.ok) {
+    const current = await response.json();
+    dispatch(getOneSong(current));
   }
 };
 
@@ -21,7 +39,14 @@ export default function reducer(state = {}, action) {
     case GET_ALL_SONGS: {
       return {
         ...state,
-        songs: action.songs,
+        list: action.list,
+      };
+    }
+
+    case SET_CURRENT_SONG: {
+      return {
+        ...state,
+        current: action.current,
       };
     }
 
