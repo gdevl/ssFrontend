@@ -1,22 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import SignIn from "./components/SignIn";
-import Navigation from "./components/Navigation";
-import { loadToken } from "./store/authentication";
+import React, { useState, useEffect } from 'react';
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
+import orange from '@material-ui/core/colors/orange';
+import { useSelector, useDispatch } from 'react-redux';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import SignIn from './components/SignIn';
+import Navigation from './components/Navigation';
+import Main from './components/Main';
+import { loadToken } from './store/authentication';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
       rest.needLogin === true ? (
-        <Redirect to="/login" />
+        <Redirect to='/login' />
       ) : (
         <Component {...props} />
       )
     }
   />
 );
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: orange[700],
+    },
+    secondary: {
+      main: blue[900],
+    },
+  },
+});
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
 const App = () => {
   const token = useSelector((state) => state.authentication.token);
@@ -32,7 +63,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    document.title = "Sound Shroud";
+    document.title = 'Sound Shroud';
   }, []);
 
   if (!loaded) {
@@ -40,21 +71,23 @@ const App = () => {
   }
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/login" component={SignIn} />
-        <PrivateRoute
-          path="/"
-          exact={true}
-          needLogin={needLogin}
-          component={Navigation}
-        />
-        <PrivateRoute
-          path="/pokemon/:pokemonId"
-          exact={true}
-          needLogin={needLogin}
-          component={Navigation}
-        />
-      </Switch>
+      <ThemeProvider theme={theme}>
+        <Switch>
+          <Route path='/login' component={SignIn} />
+          <PrivateRoute
+            path='/'
+            exact={true}
+            needLogin={needLogin}
+            component={Main}
+          />
+          <PrivateRoute
+            path='/pokemon/:pokemonId'
+            exact={true}
+            needLogin={needLogin}
+            component={Main}
+          />
+        </Switch>
+      </ThemeProvider>
     </BrowserRouter>
   );
 };
