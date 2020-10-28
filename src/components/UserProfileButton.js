@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import Tooltip from "@material-ui/core/Tooltip";
 import { deepPurple } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
@@ -25,13 +26,15 @@ const UserProfileButton = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <IconButton
-        color="secondary"
-        onClick={handleClick}
-        aria-label="View Profile"
-      >
-        <AccountCircleIcon />
-      </IconButton>
+      <Tooltip title="Profile">
+        <IconButton
+          color="secondary"
+          onClick={handleClick}
+          aria-label="Profile"
+        >
+          <AccountCircleIcon />
+        </IconButton>
+      </Tooltip>
     </div>
   );
 };

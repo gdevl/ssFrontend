@@ -1,6 +1,7 @@
 import React from "react";
 import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const ViewLibrary = () => {
   const handleClick = () => {
@@ -8,9 +9,11 @@ const ViewLibrary = () => {
   };
 
   return (
-    <IconButton color="secondary" onClick={handleClick} aria-label="sign-out">
-      <LibraryMusicIcon />
-    </IconButton>
+    <Tooltip title="My Songs">
+      <IconButton color="secondary" onClick={handleClick} aria-label="sign-out">
+        <LibraryMusicIcon />
+      </IconButton>
+    </Tooltip>
   );
 };
 
