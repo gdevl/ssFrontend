@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import SongDetails from "./SongDetails";
+import SongDetailRow from "./SongDetailRow";
 import { fetchSongs } from "../store/songs";
 
 const useStyles = makeStyles((theme) => ({
@@ -40,17 +41,24 @@ const SongList = () => {
       <Grid
         container
         direction="column"
-        justify="center"
+        justify="stretch"
         alignItems="center"
         spacing={1}
       >
         {songs.map((song) => {
           return (
             <Grid item direction="row" xs={12}>
-              <SongDetails
+              {/* <SongDetails
                 key={song.id}
                 title={song.title}
                 artist={song.creatorId}
+                genre={song.genre}
+                url={song.songUrl}
+              /> */}
+              <SongDetailRow
+                songkey={song.id}
+                title={song.title}
+                artist={song.artist.username}
                 genre={song.genre}
                 url={song.songUrl}
               />

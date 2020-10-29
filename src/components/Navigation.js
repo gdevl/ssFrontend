@@ -4,11 +4,13 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import SignOut from "./SignOut";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import AddToLibrary from "./AddToLibrary";
-import ViewLibrary from "./ViewLibrary";
+// import IconButton from "@material-ui/core/IconButton";
+// import MenuIcon from "@material-ui/icons/Menu";
+import AddSongButton from "./AddSongButton";
+import ViewLibrary from "./ViewLibraryButton";
 import UserProfileButton from "./UserProfileButton";
+
+const siteTitle = "songThrong";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,19 +31,19 @@ const Navigation = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography variant="h6" className={classes.title}>
-            Home
+            {siteTitle}
           </Typography>
           <UserProfileButton />
-          <AddToLibrary />
+          <AddSongButton />
           <ViewLibrary />
           <SignOut />
         </Toolbar>

@@ -2,9 +2,13 @@ import { baseUrl } from "../config";
 
 const GET_ALL_SONGS = "soundcloud/songs/GET_ALL_SONGS";
 const SET_CURRENT_SONG = "soundcloud/songs/SET_CURRENT_SONG";
+const SHOW_FORM = "soundcloud/songs/SHOW_FORM";
+const HIDE_FORM = "soundcloud/songs/HIDE_FORM";
 
 export const getAllSongs = (list) => ({ type: GET_ALL_SONGS, list });
 export const getOneSong = (current) => ({ type: SET_CURRENT_SONG, current });
+export const showForm = () => ({ type: SHOW_FORM });
+export const hideForm = () => ({ type: HIDE_FORM });
 
 export const fetchSongs = () => async (dispatch) => {
   const res = await fetch(`${baseUrl}/songs`, {
@@ -34,7 +38,7 @@ export const fetchOneSong = (id) => async (dispatch, getState) => {
   }
 };
 
-export default function reducer(state = {}, action) {
+export default function reducer(state = { formVisible: false }, action) {
   switch (action.type) {
     case GET_ALL_SONGS: {
       return {
@@ -47,6 +51,20 @@ export default function reducer(state = {}, action) {
       return {
         ...state,
         current: action.current,
+      };
+    }
+
+    case SHOW_FORM: {
+      return {
+        ...state,
+        formVisible: true,
+      };
+    }
+
+    case HIDE_FORM: {
+      return {
+        ...state,
+        formVisible: false,
       };
     }
 

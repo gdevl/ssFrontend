@@ -3,7 +3,7 @@ import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 
-const ViewLibrary = () => {
+const ViewLibraryButton = () => {
   const handleClick = () => {
     alert(`You clicked the ViewLibrary button!`);
   };
@@ -17,4 +17,4 @@ const ViewLibrary = () => {
   );
 };
 
-export default ViewLibrary;
+export default ViewLibraryButton;

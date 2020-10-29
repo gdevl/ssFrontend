@@ -69,7 +69,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    document.title = "Sound Shroud";
+    document.title = "SongThrong";
   }, []);
 
   if (!loaded) {
