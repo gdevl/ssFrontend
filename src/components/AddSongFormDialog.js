@@ -32,19 +32,18 @@ const AddSongFormDialog = () => {
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [song, setSong] = useState("");
+  const [open, setOpen] = React.useState(true);
 
   const formVisible = useSelector((state) => state.songs.formVisible);
   const userId = useSelector((state) => state.authentication.userId);
   const dispatch = useDispatch();
-
-  const [open, setOpen] = React.useState(true);
 
   const [openspinner, setOpenSpinner] = React.useState(false);
 
   const handleClose = () => {
     setOpenSpinner(false);
   };
-  const handleToggle = () => {};
+  // const handleToggle = () => {};
 
   const handleCancel = () => {
     dispatch(hideForm());
@@ -52,6 +51,11 @@ const AddSongFormDialog = () => {
 
   const updateProperty = (callback) => (e) => {
     callback(e.target.value);
+  };
+
+  const showSubmissionStatus = (e) => {
+    // alert(`${e.target.innerText}`);
+    e.target.innerText = "Submitting...";
   };
 
   const handleSongSubmit = (e) => {
@@ -66,62 +70,59 @@ const AddSongFormDialog = () => {
   };
 
   return (
-    <div className={classes.root}>
-      <Dialog
-        open={formVisible}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <form onSubmit={handleSongSubmit}>
-          <DialogTitle id="form-dialog-title">Add Song</DialogTitle>
-          <DialogContent>
-            <DialogContentText>Enter song details below</DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="title"
-              label="Song Title"
-              type="text"
-              fullWidth
-              value={title}
-              onChange={updateProperty(setTitle)}
-            />
-            <AddSongGenreSelect
-              autoFocus
-              margin="dense"
-              id="genre"
-              name="genre"
-              fullWidth
-              genre={genre}
-              setGenre={setGenre}
-            />
-            <input
-              type="file"
-              placeholder="Upload an mp3"
-              required
-              onChange={(e) => setSong(e.target.files[0])}
-            />
-            {/* <SongUpload /> */}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCancel} color="primary">
-              Cancel
-            </Button>
-            {/* <Button type="submit" color="primary">
-              Submit
-            </Button> */}
-            <button type="submit">Submit</button>
-            <Backdrop
-              className={classes.backdrop}
-              openspinner={openspinner}
-              onClick={handleClose}
-            >
-              <CircularProgress color="inherit" />
-            </Backdrop>
-          </DialogActions>
-        </form>
-      </Dialog>
-    </div>
+    <Dialog
+      open={formVisible}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+    >
+      <form onSubmit={handleSongSubmit}>
+        <DialogTitle id="form-dialog-title">Add Song</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Enter song details below</DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="title"
+            label="Song Title"
+            type="text"
+            fullWidth
+            value={title}
+            onChange={updateProperty(setTitle)}
+          />
+          <AddSongGenreSelect
+            autoFocus
+            margin="dense"
+            id="genre"
+            name="genre"
+            fullWidth
+            genre={genre}
+            setGenre={setGenre}
+          />
+          <input
+            type="file"
+            placeholder="Upload an mp3"
+            required
+            onChange={(e) => setSong(e.target.files[0])}
+          />
+          {/* <SongUpload /> */}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancel} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={showSubmissionStatus} type="submit" color="primary">
+            Submit
+          </Button>
+          <Backdrop
+            className={classes.backdrop}
+            openspinner={openspinner}
+            onClick={handleClose}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        </DialogActions>
+      </form>
+    </Dialog>
   );
 };
 

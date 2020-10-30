@@ -13,12 +13,6 @@ import UserProfileButton from "./UserProfileButton";
 const siteTitle = "songThrong";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   title: {
     flexGrow: 1,
   },
@@ -28,27 +22,17 @@ const Navigation = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="fixed">
-        <Toolbar>
-          {/* <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton> */}
-          <Typography variant="h6" className={classes.title}>
-            {siteTitle}
-          </Typography>
-          <UserProfileButton />
-          <AddSongButton />
-          <ViewLibrary />
-          <SignOut />
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar position="fixed">
+      <Toolbar>
+        <Typography variant="h6" className={classes.title}>
+          {siteTitle}
+        </Typography>
+        <UserProfileButton />
+        <AddSongButton />
+        <ViewLibrary />
+        <SignOut />
+      </Toolbar>
+    </AppBar>
   );
 };
 
