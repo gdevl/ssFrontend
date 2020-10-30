@@ -5,12 +5,19 @@ const SET_TOKEN = "soundcloud/authentication/SET_TOKEN";
 const REMOVE_TOKEN = "soundcloud/authentication/REMOVE_TOKEN";
 
 export const removeToken = (token) => ({ type: REMOVE_TOKEN });
-export const setToken = (token) => ({ type: SET_TOKEN, token });
+export const setToken = (token, userId, userName) => ({
+  type: SET_TOKEN,
+  token,
+  userId,
+  userName,
+});
 
 export const loadToken = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN_KEY);
-  if (token) {
-    dispatch(setToken(token));
+  const userId = window.localStorage.getItem("USER_ID");
+  const userName = window.localStorage.getItem("USER_NAME");
+  if (token && userId && userName) {
+    dispatch(setToken(token, userId, userName));
   }
 };
 
@@ -22,9 +29,14 @@ export const login = (email, password) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const { token } = await response.json();
+    const res = await response.json();
+    const token = res.token;
+    const userId = res.user.id;
+    const userName = res.user.username;
     window.localStorage.setItem(TOKEN_KEY, token);
-    dispatch(setToken(token));
+    window.localStorage.setItem("USER_ID", userId);
+    window.localStorage.setItem("USER_NAME", userName);
+    dispatch(setToken(token, userId, userName));
   }
 };
 
@@ -49,6 +61,8 @@ export default function reducer(state = {}, action) {
       return {
         ...state,
         token: action.token,
+        userId: action.userId,
+        userName: action.userName,
       };
     }
 

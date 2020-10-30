@@ -8,7 +8,7 @@ const MainContainer = () => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="md">
+      <Container style={{ padding: "60px" }} maxWidth="md">
         <Typography
           component="div"
           style={{ padding: "20px", height: "100vh" }}

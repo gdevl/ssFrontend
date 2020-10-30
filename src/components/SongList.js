@@ -25,9 +25,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SongList = () => {
   const songs = useSelector((state) => state.songs.list);
-  console.log("songs: ", songs);
+  const userName = useSelector((state) => state.authentication.userName);
   const dispatch = useDispatch();
-  const classes = useStyles();
 
   useEffect(() => {
     dispatch(fetchSongs());
@@ -58,7 +57,7 @@ const SongList = () => {
               <SongDetailRow
                 songkey={song.id}
                 title={song.title}
-                artist={song.artist.username}
+                artist={userName}
                 genre={song.genre}
                 url={song.songUrl}
               />

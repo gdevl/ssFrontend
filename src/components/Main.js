@@ -33,13 +33,11 @@ const Main = () => {
   return (
     <>
       <Navigation />
-      <div className={classes.root}>
+      <div>
         <MainContainer className={classes.padMain} />
         {formVisible ? (
           <AddSongFormDialog className="add-song-form-dialog" />
-        ) : (
-          <h2>We are here!</h2>
-        )}
+        ) : null}
       </div>
       <Grid item xs={12} className={classes.stickyFooter}>
         <Footer />

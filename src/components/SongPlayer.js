@@ -1,8 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import AudioPlayer from "material-ui-audio-player";
-
-const src = "https://open.spotify.com/track/1yb3G1zT0Hy3BaIVNJoBtA";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -57,6 +56,8 @@ const useStyles = makeStyles((theme) => {
 const playerTheme = useStyles;
 
 const SongPlayer = (props) => {
+  const playSongSrc = useSelector((state) => state.songs.playSongSrg);
+
   return (
     <AudioPlayer
       elevation={1}
@@ -69,7 +70,7 @@ const SongPlayer = (props) => {
       order="standart"
       preload="auto"
       loop={true}
-      src={src}
+      src={playSongSrc ? playSongSrc : null}
       useStyles={playerTheme}
     />
   );
