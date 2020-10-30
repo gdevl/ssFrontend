@@ -7,47 +7,58 @@ const useStyles = makeStyles((theme) => {
   return {
     root: {
       [theme.breakpoints.down("sm")]: {
-        width: "100%",
+        width: "60%",
       },
-      backgroundColor: "#ffcc80",
+      backgroundColor: "#424242",
     },
-    loopIcon: {
-      color: "#3f51b5",
-      "&.selected": {
-        color: theme.primary,
-      },
-      "&:hover": {
-        color: "#7986cb",
-      },
-      [theme.breakpoints.down("sm")]: {
-        display: "none",
-      },
-    },
+    // loopIcon: {
+    //   color: "#3f51b5",
+    //   "&.selected": {
+    //     color: theme.primary,
+    //   },
+    //   "&:hover": {
+    //     color: "#7986cb",
+    //   },
+    //   [theme.breakpoints.down("sm")]: {
+    //     display: "none",
+    //   },
+    // },
     playIcon: {
-      color: "#f50057",
+      color: "white",
       "&:hover": {
-        color: "#ff4081",
+        color: "#f57c00",
       },
     },
     volumeIcon: {
-      color: "rgba(0, 0, 0, 0.54)",
+      // color: "rgba(0, 0, 0, 0.54)",
+      color: "white",
+      "&:hover": {
+        color: "#f57c00",
+      },
     },
     volumeSlider: {
       color: "black",
     },
     progressTime: {
-      color: "rgba(0, 0, 0, 0.54)",
+      // color: "rgba(0, 0, 0, 0.54)",
+      color: "white",
     },
     mainSlider: {
-      color: "#3f51b5",
+      color: "white",
       "& .MuiSlider-rail": {
-        color: "#7986cb",
+        // color: "#7986cb",
+        color: "white",
       },
       "& .MuiSlider-track": {
-        color: "#3f51b5",
+        // color: "#3f51b5",
+        color: "white",
       },
       "& .MuiSlider-thumb": {
-        color: "#303f9f",
+        // color: "#303f9f",
+        color: "white",
+        "&:hover": {
+          color: "#f57c00",
+        },
       },
     },
   };
@@ -56,7 +67,9 @@ const useStyles = makeStyles((theme) => {
 const playerTheme = useStyles;
 
 const SongPlayer = (props) => {
-  const playSongSrc = useSelector((state) => state.songs.playSongSrg);
+  const playSongSrc = useSelector((state) => state.songs.playSongSrc);
+  // make isPlaying: bool for toggling play/pause buttons
+  console.log("songplayer props: ", props);
 
   return (
     <AudioPlayer
@@ -65,11 +78,11 @@ const SongPlayer = (props) => {
       width="100%"
       variation="default"
       spacing={1}
-      download={true}
+      // download={true}
       autoplay={true}
       order="standart"
       preload="auto"
-      loop={true}
+      // loop={true}
       src={playSongSrc ? playSongSrc : null}
       useStyles={playerTheme}
     />

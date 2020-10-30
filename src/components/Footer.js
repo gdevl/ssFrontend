@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import SongPlayer from "./SongPlayer";
+import AudioPlayerRedux from "./AudioPlayerRedux";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -20,7 +21,8 @@ const Footer = () => {
       <CssBaseline />
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
-          <SongPlayer />
+          {/* <SongPlayer /> */}
+          <AudioPlayerRedux />
         </Toolbar>
       </AppBar>
     </React.Fragment>

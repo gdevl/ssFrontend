@@ -177,6 +177,41 @@ td.centered {
   font-size: 75%;
 }
 
+/* audio player tweeks */
+.rhap_additional-controls,
+/* .rhap_volume-controls, */
+.rhap_progress-section,
+.rhap_rewind-button,
+.rhap_forward-button
+{
+  display: none;
+} 
+
+.rhap_container {
+  display: flex;
+  justify-content: center;
+}
+
+.rhap_play-pause-button,
+.rhap_volume-button
+{
+  border-radius: 50%;
+  color: white;
+  font-size: 32px;
+  padding: 0 5px;
+}
+
+.rhap_controls-section {
+  display: flex;
+}
+
+.rhap_play-pause-button:hover,
+.rhap_volume-button:hover {
+  background-color:orange;
+}
+
+
+
 @media screen and (min-width: 1000px) {
  
 }
