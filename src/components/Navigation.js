@@ -9,12 +9,14 @@ import SignOut from "./SignOut";
 import AddSongButton from "./AddSongButton";
 import ViewLibrary from "./ViewLibraryButton";
 import UserProfileButton from "./UserProfileButton";
+import HomeButton from "./HomeButton";
 
-const siteTitle = "songThrong";
+const siteTitle = "BandBuddy";
 
 const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
+    fontFamily: "Ubuntu",
   },
 }));
 
@@ -27,6 +29,7 @@ const Navigation = () => {
         <Typography variant="h6" className={classes.title}>
           {siteTitle}
         </Typography>
+        <HomeButton />
         <UserProfileButton />
         <AddSongButton />
         <ViewLibrary />

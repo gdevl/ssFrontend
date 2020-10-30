@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
-import MainContainer from "./MainContainer";
 import AddSongFormDialog from "./AddSongFormDialog";
+import Hero from "./Hero";
+import SongList from "./SongList";
+import SongTable from "./SongTable";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,21 +24,50 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
   },
   padMain: {
+    flexGrow: 8,
+    height: "calc(100vh - 124px)",
     padding: "20px",
+  },
+  spacer: {
+    height: "64px",
+    width: "100%",
+  },
+  grow: {
+    flexGrow: 1,
   },
 }));
 
 const Main = () => {
   const formVisible = useSelector((state) => state.songs.formVisible);
+  const view = useSelector((state) => state.users.view);
   const classes = useStyles();
 
   return (
     <>
-      <Navigation />
-      <MainContainer className={classes.padMain} />
-      {formVisible ? <AddSongFormDialog /> : null}
-      <Grid item xs={12} className={classes.stickyFooter}>
-        <Footer />
+      <Grid
+        container
+        direction="column"
+        justify="space-between"
+        className={classes.root}
+      >
+        <Grid item>
+          <Navigation />
+        </Grid>
+        <div className={classes.spacer}></div>
+        <Grid
+          item
+          container
+          className={classes.padMain}
+          alignItems="center"
+          justify="center"
+          direction="column"
+        >
+          {formVisible ? <AddSongFormDialog /> : null}
+          <Grid item>{view === "my-songs" ? <SongTable /> : <Hero />}</Grid>
+        </Grid>
+        <Grid item>
+          <Footer />
+        </Grid>
       </Grid>
     </>
   );

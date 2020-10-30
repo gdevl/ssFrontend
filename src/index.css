@@ -1,7 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&family=Ubuntu:wght@300;400;500;700&display=swap');
 
-html, body, input, textarea, button, select, a {
+html, body, input, textarea, button, select, a, h1, h2, h3, h4 {
   font-family: 'Ubuntu', sans-serif;
   font-size: 16px;
 }
@@ -16,8 +16,8 @@ button {
 }
 
 button:hover {
-  background-color: blueviolet;
-  color: white;
+  /* background-color: orange; */
+  color:white;
 }
 
 main {
@@ -207,8 +207,9 @@ td.centered {
 
 .rhap_play-pause-button:hover,
 .rhap_volume-button:hover {
-  background-color:orange;
+  color:orange;
 }
+
 
 
 

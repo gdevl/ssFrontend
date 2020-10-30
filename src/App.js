@@ -69,7 +69,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    document.title = "SongThrong";
+    document.title = "BandBuddy";
   }, []);
 
   if (!loaded) {

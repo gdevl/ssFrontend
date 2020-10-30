@@ -6,7 +6,8 @@ import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
 
 const AudioPlayerRedux = () => {
   const playSongSrc = useSelector((state) => state.songs.playSongSrc);
-  // return ;
+  const currentSong = useSelector((state) => state.songs.current);
+
   return (
     <Grid container spacing={2} direction="row">
       <Grid
@@ -21,7 +22,11 @@ const AudioPlayerRedux = () => {
         }}
       >
         <AudioPlayer src={playSongSrc} style={{ padding: "5px" }} />
-        <Typography style={{ padding: "5px" }}>Now playing...</Typography>
+        <Typography style={{ padding: "5px" }}>
+          {currentSong
+            ? `Now playing: '${currentSong}'`
+            : `It's quiet... too quiet`}
+        </Typography>
       </Grid>
     </Grid>
   );

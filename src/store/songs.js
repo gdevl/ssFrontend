@@ -8,7 +8,10 @@ const ADD_SONG = "soundcloud/songs/ADD_SONG";
 const PLAY_SONG = "soundcloud/songs/PLAY_SONG";
 
 export const getAllSongs = (list) => ({ type: GET_ALL_SONGS, list });
-export const getOneSong = (current) => ({ type: SET_CURRENT_SONG, current });
+export const setCurrentSong = (current) => ({
+  type: SET_CURRENT_SONG,
+  current,
+});
 export const showForm = () => ({ type: SHOW_FORM });
 export const hideForm = () => ({ type: HIDE_FORM });
 export const addSong = (song) => ({ type: ADD_SONG, song });
@@ -28,7 +31,6 @@ export const createSong = (data) => async (dispatch, getState) => {
 
   if (response.ok) {
     const { newSong } = await response.json();
-    // dispatch(getOneSong(song));
     dispatch(hideForm());
     dispatch(addSong(newSong));
     return newSong;
@@ -47,21 +49,21 @@ export const fetchSongs = () => async (dispatch) => {
   }
 };
 
-export const fetchOneSong = (id) => async (dispatch, getState) => {
-  const {
-    authentication: { token },
-  } = getState();
-  const response = await fetch(`${baseUrl}/songs/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+// export const fetchOneSong = (id) => async (dispatch, getState) => {
+//   const {
+//     authentication: { token },
+//   } = getState();
+//   const response = await fetch(`${baseUrl}/songs/${id}`, {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
 
-  if (response.ok) {
-    const current = await response.json();
-    dispatch(getOneSong(current));
-  }
-};
+//   if (response.ok) {
+//     const current = await response.json();
+//     dispatch(getOneSong(current));
+//   }
+// };
 
 export default function reducer(
   state = { formVisible: false, playSongSrc: "" },

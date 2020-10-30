@@ -4,7 +4,7 @@ import Box from "@material-ui/core/Box";
 import { useRowFlexStyles } from "@mui-treasury/styles/flex/row";
 import IconButton from "@material-ui/core/IconButton";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import { playSong } from "../store/songs";
+import { playSong, setCurrentSong } from "../store/songs";
 
 const SongDetailRow = ({ songkey, title, artist, genre, url }) => {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const SongDetailRow = ({ songkey, title, artist, genre, url }) => {
 
   const handleClick = (e) => {
     dispatch(playSong(url));
+    dispatch(setCurrentSong(title));
   };
 
   return (
