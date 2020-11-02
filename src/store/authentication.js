@@ -1,8 +1,10 @@
-import { baseUrl } from "../config";
+import { baseUrl } from '../config';
 
-const TOKEN_KEY = "soundcloud/authentication/token";
-const SET_TOKEN = "soundcloud/authentication/SET_TOKEN";
-const REMOVE_TOKEN = "soundcloud/authentication/REMOVE_TOKEN";
+const TOKEN_KEY = 'bandbuddy/authentication/token';
+const SET_TOKEN = 'bandbuddy/authentication/SET_TOKEN';
+const REMOVE_TOKEN = 'bandbuddy/authentication/REMOVE_TOKEN';
+const ADD_USER = 'bandbuddy/authentication/ADD_USER';
+const SET_CURRENT_USER = 'bandbuddy/authentication/SET_CURRENT_USER';
 
 export const removeToken = (token) => ({ type: REMOVE_TOKEN });
 export const setToken = (token, userId, userName) => ({
@@ -12,10 +14,30 @@ export const setToken = (token, userId, userName) => ({
   userName,
 });
 
+export const addUser = (user) => ({ type: ADD_USER, user });
+export const setCurrentUser = (user) => ({ type: SET_CURRENT_USER, user });
+
+export const createUser = (data) => async (dispatch, getState) => {
+  console.log('posted user data: ', data);
+  const response = await fetch(`${baseUrl}/users`, {
+    method: 'post',
+    headers: {
+      // Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (response.ok) {
+    const { newUser } = await response.json();
+    dispatch(addUser(newUser));
+    return newUser;
+  }
+};
+
 export const loadToken = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN_KEY);
-  const userId = window.localStorage.getItem("USER_ID");
-  const userName = window.localStorage.getItem("USER_NAME");
+  const userId = window.localStorage.getItem('USER_ID');
+  const userName = window.localStorage.getItem('USER_NAME');
   if (token && userId && userName) {
     dispatch(setToken(token, userId, userName));
   }
@@ -23,8 +45,8 @@ export const loadToken = () => async (dispatch) => {
 
 export const login = (email, password) => async (dispatch) => {
   const response = await fetch(`${baseUrl}/session`, {
-    method: "put",
-    headers: { "Content-Type": "application/json" },
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   });
 
@@ -34,8 +56,8 @@ export const login = (email, password) => async (dispatch) => {
     const userId = res.user.id;
     const userName = res.user.username;
     window.localStorage.setItem(TOKEN_KEY, token);
-    window.localStorage.setItem("USER_ID", userId);
-    window.localStorage.setItem("USER_NAME", userName);
+    window.localStorage.setItem('USER_ID', userId);
+    window.localStorage.setItem('USER_NAME', userName);
     dispatch(setToken(token, userId, userName));
   }
 };
@@ -45,7 +67,7 @@ export const logout = () => async (dispatch, getState) => {
     authentication: { token },
   } = getState();
   const response = await fetch(`${baseUrl}/session`, {
-    method: "delete",
+    method: 'delete',
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -70,6 +92,13 @@ export default function reducer(state = {}, action) {
       const newState = { ...state };
       delete newState.token;
       return newState;
+    }
+
+    case ADD_USER: {
+      return {
+        ...state,
+        user: action.user,
+      };
     }
 
     default:
