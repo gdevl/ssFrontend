@@ -1,11 +1,12 @@
-import { baseUrl } from '../config';
+import { baseUrl } from "../config";
 
-const GET_ALL_SONGS = 'soundcloud/songs/GET_ALL_SONGS';
-const SET_CURRENT_SONG = 'soundcloud/songs/SET_CURRENT_SONG';
-const SHOW_FORM = 'soundcloud/songs/SHOW_FORM';
-const HIDE_FORM = 'soundcloud/songs/HIDE_FORM';
-const ADD_SONG = 'soundcloud/songs/ADD_SONG';
-const PLAY_SONG = 'soundcloud/songs/PLAY_SONG';
+const GET_ALL_SONGS = "bandbuddy/songs/GET_ALL_SONGS";
+const SET_CURRENT_SONG = "bandbuddy/songs/SET_CURRENT_SONG";
+const SHOW_FORM = "bandbuddy/songs/SHOW_FORM";
+const HIDE_FORM = "bandbuddy/songs/HIDE_FORM";
+const ADD_SONG = "bandbuddy/songs/ADD_SONG";
+const PLAY_SONG = "bandbuddy/songs/PLAY_SONG";
+const DESTROY_SONG = "bandbuddy/songs/DESTROY_SONG";
 
 export const getAllSongs = (list) => ({ type: GET_ALL_SONGS, list });
 export const setCurrentSong = (current) => ({
@@ -19,10 +20,26 @@ export const playSong = (playSongSrc) => ({
   type: PLAY_SONG,
   playSongSrc,
 });
+export const destroySong = (song, list) => ({ type: DESTROY_SONG, song, list });
+
+export const deleteSong = (id) => async (dispatch, getState) => {
+  const response = await fetch(`${baseUrl}/songs/${id}`, {
+    method: "delete",
+    headers: {},
+  });
+
+  if (response.ok) {
+    const res = response.json();
+    dispatch(destroySong(res));
+    const { list } = getState();
+    console.log("list: ", list);
+    dispatch(getAllSongs(list));
+  }
+};
 
 export const createSong = (data) => async (dispatch, getState) => {
   const response = await fetch(`${baseUrl}/songs`, {
-    method: 'post',
+    method: "post",
     headers: {
       // Authorization: `Bearer ${token}`,
     },
@@ -39,8 +56,8 @@ export const createSong = (data) => async (dispatch, getState) => {
 
 export const fetchSongs = () => async (dispatch) => {
   const res = await fetch(`${baseUrl}/songs`, {
-    method: 'get',
-    headers: { 'Content-Type': 'application/json' },
+    method: "get",
+    headers: { "Content-Type": "application/json" },
   });
 
   if (res.ok) {
@@ -66,7 +83,7 @@ export const fetchSongs = () => async (dispatch) => {
 // };
 
 export default function reducer(
-  state = { formVisible: false, playSongSrc: '' },
+  state = { formVisible: false, playSongSrc: "" },
   action
 ) {
   switch (action.type) {
@@ -109,6 +126,16 @@ export default function reducer(
       return {
         ...state,
         playSongSrc: action.playSongSrc,
+      };
+    }
+
+    case DESTROY_SONG: {
+      return {
+        ...state,
+        list: [
+          ...state.list.slice(0, action.song),
+          ...state.list.slice(action.song + 1),
+        ],
       };
     }
 

@@ -89,6 +89,7 @@ const SongTable = () => {
                 <TableCell align="right">Artist</TableCell>
                 <TableCell align="right">Genre</TableCell>
                 <TableCell align="right">Play</TableCell>
+                <TableCell align="right">Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

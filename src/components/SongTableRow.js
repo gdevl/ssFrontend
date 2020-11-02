@@ -4,15 +4,23 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import IconButton from "@material-ui/core/IconButton";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import { playSong, setCurrentSong } from "../store/songs";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { playSong, setCurrentSong, deleteSong } from "../store/songs";
 
 const SongTableRow = ({ songkey, title, artist, genre, url }) => {
   const dispatch = useDispatch();
 
-  const handleClick = (e) => {
+  const handlePlay = (e) => {
+    e.preventDefault();
     dispatch(playSong(url));
     dispatch(setCurrentSong(title));
   };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    dispatch(deleteSong(songkey));
+  };
+
   return (
     <TableRow key={songkey}>
       <TableCell component="th" scope="row">
@@ -22,7 +30,12 @@ const SongTableRow = ({ songkey, title, artist, genre, url }) => {
       <TableCell align="right">{genre}</TableCell>
       <TableCell align="right">
         <IconButton aria-label="play/pause">
-          <PlayArrowIcon onClick={handleClick} />
+          <PlayArrowIcon onClick={handlePlay} />
+        </IconButton>
+      </TableCell>
+      <TableCell align="right">
+        <IconButton aria-label="delete">
+          <DeleteIcon onClick={handleDelete} />
         </IconButton>
       </TableCell>
     </TableRow>

@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { createUser } from '../store/authentication';
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { createUser } from "../store/authentication";
 
 function Copyright() {
   return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      {'Copyright © '}
-      <Link color='inherit' href='https://material-ui.com/'>
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -31,28 +31,32 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  ubuntu: {
+    fontFamily: "Ubuntu",
+    textAlign: "center",
+  },
 }));
 
 const SignUp = () => {
   const classes = useStyles();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [open, setOpen] = React.useState(true);
 
   // const formVisible = useSelector((state) => state.songs.formVisible);
@@ -64,92 +68,97 @@ const SignUp = () => {
 
   const showSubmissionStatus = (e) => {
     // alert(`${e.target.innerText}`);
-    e.target.innerText = 'Submitting...';
+    e.target.innerText = "Submitting...";
   };
 
-  const handleUserSubmit = async (e) => {
+  const handleUserSubmit = (e) => {
     e.preventDefault();
-    // const userData = new FormData();
-    // userData.append('email', email);
-    // console.log('userData.email: ', userData.email);
-    // userData.append('password', password);
-    // userData.append('username', username);
-    // console.log('userData at time of dispatch: ', userData);
     const data = {
       email,
       password,
       username,
     };
-    await dispatch(createUser(data));
+    dispatch(createUser(data));
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+        <Typography
+          className={classes.ubuntu}
+          component="h1"
+          variant="h2"
+          justify="center"
+        >
+          Join BandBuddy
+        </Typography>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component='h1' variant='h5'>
+        <Typography component="h1" variant="h5">
           Sign up
         </Typography>
         <form onSubmit={handleUserSubmit} className={classes.form}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 required
                 fullWidth
-                id='email'
-                label='Email Address'
-                name='email'
-                autoComplete='email'
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
                 value={email}
                 onChange={updateProperty(setEmail)}
+                className={classes.ubuntu}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 required
                 fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='current-password'
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
                 value={password}
                 onChange={updateProperty(setPassword)}
+                className={classes.ubuntu}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant='outlined'
+                variant="outlined"
                 required
                 fullWidth
-                name='username'
-                label='Username'
-                type='text'
-                id='username'
-                autoComplete='username'
+                name="username"
+                label="Username"
+                type="text"
+                id="username"
+                autoComplete="username"
                 value={username}
                 onChange={updateProperty(setUsername)}
+                className={classes.ubuntu}
               />
             </Grid>
           </Grid>
           <Button
-            type='submit'
+            type="submit"
             fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
+            variant="contained"
+            color="primary"
+            className={(classes.submit, classes.ubuntu)}
             onClick={showSubmissionStatus}
           >
             Sign Up
           </Button>
-          <Grid container justify='flex-end'>
+          <Grid container justify="flex-end">
             <Grid item>
-              <Link href='#' variant='body2'>
+              <Link href="/" variant="body2" className={classes.ubuntu}>
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -157,7 +166,7 @@ const SignUp = () => {
         </form>
       </div>
       <Box mt={5}>
-        <Copyright />
+        <Copyright className={classes.ubuntu} />
       </Box>
     </Container>
   );

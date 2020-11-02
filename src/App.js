@@ -87,7 +87,7 @@ const App = () => {
             component={Main}
           />
           <PrivateRoute
-            path="/pokemon/:pokemonId"
+            path="/me"
             exact={true}
             needLogin={needLogin}
             component={Main}
