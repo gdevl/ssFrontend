@@ -29,8 +29,9 @@ export const createUser = (data) => async (dispatch, getState) => {
 
   if (response.ok) {
     const { newUser } = await response.json();
-    dispatch(addUser(newUser));
-    return newUser;
+    console.log('newUser: ', newUser);
+    dispatch(setToken(newUser.tokenId, newUser.id, newUser.username));
+    // return newUser;
   }
 };
 

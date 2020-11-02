@@ -67,14 +67,20 @@ const SignUp = () => {
     e.target.innerText = 'Submitting...';
   };
 
-  const handleUserSubmit = (e) => {
+  const handleUserSubmit = async (e) => {
     e.preventDefault();
-    const userData = new FormData();
-    userData.append('email', email);
-    userData.append('password', password);
-    userData.append('username', username);
-    console.log('userData at time of dispatch: ', userData);
-    dispatch(createUser(userData));
+    // const userData = new FormData();
+    // userData.append('email', email);
+    // console.log('userData.email: ', userData.email);
+    // userData.append('password', password);
+    // userData.append('username', username);
+    // console.log('userData at time of dispatch: ', userData);
+    const data = {
+      email,
+      password,
+      username,
+    };
+    await dispatch(createUser(data));
   };
 
   return (
@@ -87,7 +93,7 @@ const SignUp = () => {
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <form className={classes.form} noValidate onSubmit={handleUserSubmit}>
+        <form onSubmit={handleUserSubmit} className={classes.form}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -137,6 +143,7 @@ const SignUp = () => {
             variant='contained'
             color='primary'
             className={classes.submit}
+            onClick={showSubmissionStatus}
           >
             Sign Up
           </Button>
