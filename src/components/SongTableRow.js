@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
@@ -20,6 +20,8 @@ const SongTableRow = ({ songkey, title, artist, genre, url }) => {
     e.preventDefault();
     dispatch(deleteSong(songkey));
   };
+
+  useEffect(() => {});
 
   return (
     <TableRow key={songkey}>

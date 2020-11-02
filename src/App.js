@@ -4,9 +4,6 @@ import {
   createMuiTheme,
   ThemeProvider,
 } from "@material-ui/core/styles";
-// import blue from "@material-ui/core/colors/blue";
-// import grey from "@material-ui/core/colors/grey";
-// import orange from "@material-ui/core/colors/orange";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import SignIn from "./components/SignIn";
