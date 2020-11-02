@@ -15,19 +15,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { createUser } from "../store/authentication";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -53,6 +40,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = () => {
+  function Copyright() {
+    return (
+      <Typography
+        variant="body2"
+        color="textSecondary"
+        align="center"
+        className={classes.ubuntu}
+      >
+        {"Copyright © "}
+        BandBuddy{` `}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+    );
+  }
+
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -96,10 +99,13 @@ const SignUp = () => {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" className={classes.ubuntu}>
           Sign up
         </Typography>
-        <form onSubmit={handleUserSubmit} className={classes.form}>
+        <form
+          onSubmit={handleUserSubmit}
+          className={(classes.form, classes.ubuntu)}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField

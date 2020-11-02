@@ -4,11 +4,9 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import SignOut from "./SignOut";
-// import IconButton from "@material-ui/core/IconButton";
-// import MenuIcon from "@material-ui/icons/Menu";
 import AddSongButton from "./AddSongButton";
 import ViewLibrary from "./ViewLibraryButton";
-import UserProfileButton from "./UserProfileButton";
+// import UserProfileButton from "./UserProfileButton";
 import HomeButton from "./HomeButton";
 
 const siteTitle = "BandBuddy";
@@ -30,7 +28,7 @@ const Navigation = () => {
           {siteTitle}
         </Typography>
         <HomeButton />
-        <UserProfileButton />
+        {/* <UserProfileButton /> */}
         <AddSongButton />
         <ViewLibrary />
         <SignOut />
